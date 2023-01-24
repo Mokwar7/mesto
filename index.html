@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/style.css">
+  <title lang="en">Mesto</title>
+</head>
+<body class="overflow">
+
+<!-- POPUP -->
+
+  <div class="popup">
+    <div class="popup__container">
+    <div class="popup__block">
+      <p class="popup__name">
+        Редактировать профиль
+      </p>
+      <form action="" class="popup__form">
+        <label>
+          <input type="text" name="name" id="name" placeholder="Имя профиля" required class="popup__input">
+        </label>
+        <label>
+          <input type="text" name="description" id="description" placeholder="Описание профиля" required class="popup__input">
+        </label>
+        <button type="button" class="popup__save-button">Сохранить</button>
+      </form>
+    </div>
+    <img src="./images/add button.svg" alt="" class="popup__close-button">
+  </div>
+  </div>
+
+<!-- HEADER -->
+
+  <header class="header">
+    <img src="./images/logo.svg" alt="Логотип" class="header__logo">
+  </header>
+
+<!-- MAIN OF THE BODY -->
+
+  <main>
+
+<!-- PROFILE -->
+
+    <section class="profile">
+      <img src="./images/avatar.jpg" alt="Аватарка" class="profile__avatar">
+      <div class="profile__info">
+        <h1 class="profile__name">
+          Mokwar
+        </h1>
+        <img src="./images/Edit Button.svg" alt="Кнопка - отредактировать имя и описание профиля" class="profile__edit-button hover">
+        <p class="profile__description">
+          Like to study everytime :D
+        </p>
+      </div>
+      <div class="profile__add-button hover"></div>
+    </section>
+
+<!-- ELEMENTS -->
+
+    <section class="elements">
+      <div class="element">
+        <img src="./images/change this settings.png" alt="Фотография поста" class="element__photo">
+        <h3 class="element__name">
+          Поменяй эти настройки!
+        </h3>
+        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
+      </div>
+      <div class="element">
+        <img src="./images/am I bad.jpg" alt="Фотография поста" class="element__photo">
+        <h3 class="element__name">
+          Я дно?
+        </h3>
+        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
+      </div>
+      <div class="element">
+        <img src="./images/reached Radiant.jpg" alt="Фотография поста" class="element__photo">
+        <h3 class="element__name">
+          Радиант
+        </h3>
+        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
+      </div>
+      <div class="element">
+        <img src="./images/u miss click.jpg" alt="Фотография поста" class="element__photo">
+        <h3 class="element__name">
+          Ты промазал!
+        </h3>
+        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
+      </div>
+      <div class="element">
+        <img src="./images/u r so bad.jpg" alt="Фотография поста" class="element__photo">
+        <h3 class="element__name">
+          Ты нуб
+        </h3>
+        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
+      </div>
+      <div class="element">
+        <img src="./images/change this settings.png" alt="Фотография поста" class="element__photo">
+        <h3 class="element__name">
+          Поменяй эти настройки, чтобы стать лучше!
+        </h3>
+        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
+      </div>
+    </section>
+  </main>
+
+<!-- FOOTER OF THE BODY -->
+
+  <footer class="footer">
+    <p class="footer__copyright" lang="en">
+      @ 2023 Mesto Russia
+    </p>
+  </footer>
+
+<script src="./vendor/animate.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.popup__block {
+    width: 430px;
+    height: 330px;
+    background-color: #fff;
+    color: #000;
+    margin: 0 auto;
+    align-self: end;
+    border-radius: 10px;
+}

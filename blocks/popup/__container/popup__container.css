@@ -1,0 +1,6 @@
+.popup__container {
+    display: flex;
+    height: 360px;
+    align-self: center;
+    margin: 0 auto;
+}
