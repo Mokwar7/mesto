@@ -5,31 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
-  <title lang="en">Mesto</title>
+  <title>Место</title>
 </head>
 <body class="overflow">
-
-<!-- POPUP -->
-
-  <div class="popup">
-    <div class="popup__container">
-    <div class="popup__block">
-      <p class="popup__name">
-        Редактировать профиль
-      </p>
-      <form action="" class="popup__form">
-        <label>
-          <input type="text" name="name" id="name" placeholder="Имя профиля" required class="popup__input">
-        </label>
-        <label>
-          <input type="text" name="description" id="description" placeholder="Описание профиля" required class="popup__input">
-        </label>
-        <button type="button" class="popup__save-button">Сохранить</button>
-      </form>
-    </div>
-    <img src="./images/add button.svg" alt="" class="popup__close-button">
-  </div>
-  </div>
 
 <!-- HEADER -->
 
@@ -49,57 +27,59 @@
         <h1 class="profile__name">
           Mokwar
         </h1>
-        <img src="./images/Edit Button.svg" alt="Кнопка - отредактировать имя и описание профиля" class="profile__edit-button hover">
+        <button type="submit" class="profile__edit-button">
+          <img src="./images/Edit_Button.svg" alt="Кнопка - отредактировать имя и описание профиля" class="profile__img-edit-button hover">
+        </button>
         <p class="profile__description">
           Like to study everytime :D
         </p>
       </div>
-      <div class="profile__add-button hover"></div>
+      <button type="submit" class="profile__add-button hover"></button>
     </section>
 
 <!-- ELEMENTS -->
 
     <section class="elements">
       <div class="element">
-        <img src="./images/change this settings.png" alt="Фотография поста" class="element__photo">
-        <h3 class="element__name">
+        <img src="./images/change_this_settings.png" alt="Фотография поста" class="element__photo">
+        <h2 class="element__name">
           Поменяй эти настройки!
-        </h3>
+        </h2>
         <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
       </div>
       <div class="element">
-        <img src="./images/am I bad.jpg" alt="Фотография поста" class="element__photo">
-        <h3 class="element__name">
+        <img src="./images/am_I_bad.jpg" alt="Фотография поста" class="element__photo">
+        <h2 class="element__name">
           Я дно?
-        </h3>
+        </h2>
         <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
       </div>
       <div class="element">
-        <img src="./images/reached Radiant.jpg" alt="Фотография поста" class="element__photo">
-        <h3 class="element__name">
+        <img src="./images/reached_Radiant.jpg" alt="Фотография поста" class="element__photo">
+        <h2 class="element__name">
           Радиант
-        </h3>
+        </h2>
         <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
       </div>
       <div class="element">
-        <img src="./images/u miss click.jpg" alt="Фотография поста" class="element__photo">
-        <h3 class="element__name">
+        <img src="./images/u_miss_click.jpg" alt="Фотография поста" class="element__photo">
+        <h2 class="element__name">
           Ты промазал!
-        </h3>
+        </h2>
         <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
       </div>
       <div class="element">
-        <img src="./images/u r so bad.jpg" alt="Фотография поста" class="element__photo">
-        <h3 class="element__name">
+        <img src="./images/u_r_so_bad.jpg" alt="Фотография поста" class="element__photo">
+        <h2 class="element__name">
           Ты нуб
-        </h3>
+        </h2>
         <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
       </div>
       <div class="element">
-        <img src="./images/change this settings.png" alt="Фотография поста" class="element__photo">
-        <h3 class="element__name">
+        <img src="./images/change_this_settings.png" alt="Фотография поста" class="element__photo">
+        <h2 class="element__name">
           Поменяй эти настройки, чтобы стать лучше!
-        </h3>
+        </h2>
         <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
       </div>
     </section>
@@ -113,6 +93,33 @@
     </p>
   </footer>
 
-<script src="./vendor/animate.js"></script>
+<!-- POPUP -->
+
+  <div class="popup">
+    <div class="popup__container">
+    <div class="popup__block">
+      <h2 class="popup__name">
+        Редактировать профиль
+      </h2>
+      <form class="popup__form" name="popup">
+        <label>
+          <input type="text" name="name" id="name" placeholder="Имя профиля" required class="popup__input popup__input_name" value="">
+        </label>
+        <label>
+          <input type="text" name="description" id="description" placeholder="Описание профиля" required class="popup__input popup__input_description">
+        </label>
+        <button type="submit" class="popup__save-button">Сохранить</button>
+      </form>
+    </div>
+    <button class="popup__close-button" type="button">
+      <img src="./images/add_button.svg" alt="кнопка закрытия" class="popup__img-close-button hover">
+    </button>
+  </div>
+  </div>
+
+<!-- SCRIPT -->
+
+<script src="./scripts/index.js"></script>
+
 </body>
 </html>
