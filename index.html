@@ -40,48 +40,7 @@
 <!-- ELEMENTS -->
 
     <section class="elements">
-      <div class="element">
-        <img src="./images/change_this_settings.png" alt="Фотография поста" class="element__photo">
-        <h2 class="element__name">
-          Поменяй эти настройки!
-        </h2>
-        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
-      </div>
-      <div class="element">
-        <img src="./images/am_I_bad.jpg" alt="Фотография поста" class="element__photo">
-        <h2 class="element__name">
-          Я дно?
-        </h2>
-        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
-      </div>
-      <div class="element">
-        <img src="./images/reached_Radiant.jpg" alt="Фотография поста" class="element__photo">
-        <h2 class="element__name">
-          Радиант
-        </h2>
-        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
-      </div>
-      <div class="element">
-        <img src="./images/u_miss_click.jpg" alt="Фотография поста" class="element__photo">
-        <h2 class="element__name">
-          Ты промазал!
-        </h2>
-        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
-      </div>
-      <div class="element">
-        <img src="./images/u_r_so_bad.jpg" alt="Фотография поста" class="element__photo">
-        <h2 class="element__name">
-          Ты нуб
-        </h2>
-        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
-      </div>
-      <div class="element">
-        <img src="./images/change_this_settings.png" alt="Фотография поста" class="element__photo">
-        <h2 class="element__name">
-          Поменяй эти настройки, чтобы стать лучше!
-        </h2>
-        <img src="./images/like.svg" alt="Поставить лайк" class="element__heart hover">
-      </div>
+      
     </section>
   </main>
 
@@ -116,6 +75,56 @@
     </button>
   </div>
   </div>
+
+  <div class="popup">
+    <div class="popup__container">
+    <div class="popup__block">
+      <h2 class="popup__name">
+        Новое место
+      </h2>
+      <form class="popup__form" name="popup">
+        <label>
+          <input type="text" name="name" id="name" placeholder="Название" required class="popup__input popup__input_type_name" value="">
+        </label>
+        <label>
+          <input type="text" name="description" id="description" placeholder="Ссылка на картинку" required class="popup__input popup__input_type_description">
+        </label>
+        <button type="submit" class="popup__save-button">Сохранить</button>
+      </form>
+    </div>
+    <button class="popup__close-button" type="button">
+      <img src="./images/add_button.svg" alt="кнопка закрытия" class="popup__img-close-button hover">
+    </button>
+  </div>
+  </div>
+
+<!-- TEMPLATES -->
+
+<!-- TEMPLATE ELEMENT -->
+
+<template id="template_element">
+  <div class="element">
+    <div class="element__delete hover"></div>
+    <div class="element__photo"></div>
+    <h2 class="element__name">
+    </h2>
+    <div class="element__heart hover"></div>
+  </div>
+</template>
+
+<!-- TEMPLATE POPUP-IMAGE -->
+
+<template id="template_popup-image">
+  <div class="popup-image">
+    <div class="popup-image__container">
+      <button class="popup__close-button popup-image__close" type="button">
+        <img src="./images/add_button.svg" alt="кнопка закрытия" class="popup__img-close-button hover">
+      </button>
+      <img src="./images/add_button.svg" alt="фотография" class="popup-image__photo">
+      <p class="popup-image__name"></p>
+    </div>
+  </div>
+</template>
 
 <!-- SCRIPT -->
 
