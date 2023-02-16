@@ -54,7 +54,7 @@
 
 <!-- POPUP -->
 
-  <div class="popup">
+  <div class="popup popup-profile">
     <div class="popup__container">
     <div class="popup__block">
       <h2 class="popup__name">
@@ -76,7 +76,7 @@
   </div>
   </div>
 
-  <div class="popup">
+  <div class="popup popup-post">
     <div class="popup__container">
     <div class="popup__block">
       <h2 class="popup__name">
@@ -98,23 +98,6 @@
   </div>
   </div>
 
-<!-- TEMPLATES -->
-
-<!-- TEMPLATE ELEMENT -->
-
-<template id="template_element">
-  <div class="element">
-    <div class="element__delete hover"></div>
-    <div class="element__photo"></div>
-    <h2 class="element__name">
-    </h2>
-    <div class="element__heart hover"></div>
-  </div>
-</template>
-
-<!-- TEMPLATE POPUP-IMAGE -->
-
-<template id="template_popup-image">
   <div class="popup-image">
     <div class="popup-image__container">
       <button class="popup__close-button popup-image__close" type="button">
@@ -123,6 +106,16 @@
       <img src="./images/add_button.svg" alt="фотография" class="popup-image__photo">
       <p class="popup-image__name"></p>
     </div>
+  </div>
+<!-- TEMPLATES -->
+
+<template id="template_element">
+  <div class="element">
+    <div class="element__delete hover"></div>
+    <img src="" alt="" class="element__photo">
+    <h2 class="element__name">
+    </h2>
+    <div class="element__heart hover"></div>
   </div>
 </template>
 
