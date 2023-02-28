@@ -19,6 +19,7 @@ const createElement = (name, src) => {
   });
   newElementImg.addEventListener('click', () => {
     openPopupImage(newElementName.textContent, newElementImg.src);
+    console.log('sd')
   });
   return newElement;
 }
@@ -37,6 +38,16 @@ const openPopupImage = (name, src) => {
   popupImagePhoto.src = src;
   popupImagePhoto.alt = 'фото ' + name;
   openPopup(popupImage);
+  popupImage.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popupImage);
+    }
+  })
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(popupImage);
+    }
+  })
 }
 const addButton = document.querySelector('.profile__add-button');
 const editButton = document.querySelector('.profile__edit-button');
