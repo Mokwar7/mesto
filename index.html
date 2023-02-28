@@ -60,12 +60,14 @@
       <h2 class="popup__name">
         Редактировать профиль
       </h2>
-      <form class="popup__form" name="popup">
+      <form class="popup__form" name="popup" novalidate>
         <label>
-          <input type="text" name="name" id="name" placeholder="Имя профиля" required class="popup__input popup__input_type_name" value="">
+          <input type="text" name="name" id="name" minlength="2" maxlength="40" placeholder="Имя профиля" required class="popup__input popup__input_type_name" value="" required>
+          <span class="name-error"></span>
         </label>
         <label>
-          <input type="text" name="description" id="description" placeholder="Описание профиля" required class="popup__input popup__input_type_description">
+          <input type="text" name="c" id="description" minlength="2" maxlength="200" placeholder="Описание профиля" required class="popup__input popup__input_type_description" required>
+          <span class="description-error"></span>
         </label>
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
@@ -82,12 +84,14 @@
       <h2 class="popup__name">
         Новое место
       </h2>
-      <form class="popup__form" name="popup">
+      <form class="popup__form" name="popup" novalidate>
         <label>
-          <input type="text" name="name" id="naming" placeholder="Название" required class="popup__input popup__input_type_name" value="">
+          <input type="text" name="name" id="name" minlength="2" maxlength="30" placeholder="Название" required class="popup__input popup__input_type_name" value="" required>
+          <span class="name-error"></span>
         </label>
         <label>
-          <input type="text" name="description" id="link" placeholder="Ссылка на картинку" required class="popup__input popup__input_type_description">
+          <input type="url" name="description" id="link" placeholder="Ссылка на картинку" required class="popup__input popup__input_type_description" required>
+          <span class="link-error"></span>
         </label>
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
@@ -107,6 +111,7 @@
       <p class="popup-image__name"></p>
     </div>
   </div>
+  
 <!-- TEMPLATES -->
 
 <template id="template_element">
@@ -122,6 +127,6 @@
 <!-- SCRIPT -->
 
 <script src="./scripts/index.js"></script>
-
+<script src="./scripts/validate.js"></script>
 </body>
 </html>
