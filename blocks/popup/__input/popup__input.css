@@ -4,11 +4,7 @@
     font-size: 14px;
     line-height: 17px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    margin-top: 30px;
     width: 358px;
-}
-
-.popup__input[type="text"] {
     padding: 0 0 13px 0;
 }
 
