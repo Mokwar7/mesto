@@ -1,31 +1,3 @@
-const initialCards = [{  name: 'Архыз',  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},{  name: 'Челябинская область',  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},{  name: 'Иваново',  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},{  name: 'Камчатка',  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},{  name: 'Холмогорский район',  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},{  name: 'Байкал',  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'}]; 
-
-const containerElements = document.querySelector('.elements');
-const templateElement = document.querySelector('#template_element');
-const createElement = (name, src) => {
-  const newElement = templateElement.content.querySelector('.element').cloneNode(true);
-  const newElementName = newElement.querySelector('.element__name');
-  const newElementImg = newElement.querySelector('.element__photo');
-  const newElementHeart = newElement.querySelector('.element__heart');
-  const newElementDelete = newElement.querySelector('.element__delete');
-  newElementName.textContent = name;
-  newElementImg.src = src;
-  newElementImg.alt = 'фото ' + name;
-  newElementHeart.addEventListener('click', () => {
-    newElementHeart.classList.toggle('element__heart_active');
-  });
-  newElementDelete.addEventListener('click', () => {
-    newElementDelete.closest('.element').remove();
-  });
-  newElementImg.addEventListener('click', (evt) => {
-    openPopupImage(newElementName.textContent, newElementImg.src);
-
-  });
-  return newElement;
-}
-const renderElement = (name, src) => {
-  containerElements.prepend(createElement(name, src));
-}
 const popupImage = document.querySelector('.popup-image');
 const popupImageName = popupImage.querySelector('.popup-image__name');
 const popupImagePhoto = popupImage.querySelector('.popup-image__photo');
@@ -40,6 +12,8 @@ const openPopupImage = (name, src) => {
   openPopup(popupImage);
 
 }
+
+export {openPopupImage, popupImage, popupImageName, popupImagePhoto}
 const addButton = document.querySelector('.profile__add-button');
 const editButton = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('.popup-profile');
@@ -94,18 +68,22 @@ popupEditClose.addEventListener('click', () => {
   closePopup(popupEdit);
 });
 
-initialCards.forEach((item) => {
-  renderElement(item.name, item.link);
-});
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = formEditInputName.value;
   profileDescription.textContent = formEditInputDescription.value;
   closePopup(popupEdit);
 }
+
+
+import {Card} from './card.js';
+
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
-  renderElement(formAddInputName.value, formAddInputLink.value);
+  const newData = {name: formAddInputName.value, link: formAddInputLink.value};
+  const newCard = new Card(newData);
+  newCard.generateCard();
   evt.target.reset();
   closePopup(popupAdd);
 }
