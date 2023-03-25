@@ -34,7 +34,12 @@ class Card {
         this._img.src = this._imgData;
         this._img.alt = 'Фото ' + this._nameData;
         this._seteventListeners();
-        document.querySelector('.elements').prepend(this._card);
+        
+        return this._card;
+    }
+
+    render(selector) {
+        selector.prepend(this._card);
     }
 }
 

@@ -1,11 +1,9 @@
-import {config} from '../utils/constants.js';
-  
 class FormValidator {
     constructor(configuration, formElement) {
         this._config = configuration;
         this._form = formElement;
-        this._inputList = Array.from(this._form.querySelectorAll(config.inputSelector));
-        this._button = this._form.querySelector(config.saveButtonSelector);
+        this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
+        this._button = this._form.querySelector(this._config.saveButtonSelector);
     }
 
     _showInputError = (inputElement) => {
@@ -63,15 +61,23 @@ class FormValidator {
                 this._checkInputValidity(inputElement);
                 this._toggleButtonState();
             })
+            
         })
     }
 
     enableValidation() {
         this._form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this._disableButton()
+            this._disableButton();
         })
         this._setEventListeners();
+    }
+
+    removeValidationErrors() {
+        this._inputList.forEach((inputElement) => {
+            this._hideInputError(inputElement)
+            inputElement.value = ''
+        })
     }
 }
 

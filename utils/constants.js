@@ -8,4 +8,8 @@ const config = {
     templateSelector: '#template_element',
 }
 
-export {config}
+const popupImage = document.querySelector('.popup-image');
+const popupImageName = popupImage.querySelector('.popup-image__name');
+const popupImagePhoto = popupImage.querySelector('.popup-image__photo');
+
+export {config, popupImage, popupImageName, popupImagePhoto}
