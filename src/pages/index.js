@@ -83,7 +83,6 @@ api.getInitialCards()
   .then(data => {
     data.forEach(item => {
       renderCard(item)
-      console.log(item)
     })
 })
 
@@ -131,7 +130,7 @@ const popupAvatarForm = new PopupWithForm(
   {
     handleFormSubmit: (data, button) => {
       renderLoading(true, button)
-      api.updateAvatar(data.link)
+      api.updateAvatar(data.links)
         .then((data) => {
           avatar.style.backgroundImage = `url(${data.avatar})`
           renderLoading(false, button)

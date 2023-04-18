@@ -124,7 +124,7 @@ export default class Api{
     }
 
     updateAvatar(avatar) {
-        return fetch(this._url + 'users/me/avatar', {
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-64/users/me/avatar', {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
