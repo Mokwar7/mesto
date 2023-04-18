@@ -11,7 +11,7 @@
 <!-- HEADER -->
 
   <header class="header">
-    <img src="../images/logo.svg" alt="Логотип" class="header__logo">
+    <img src="<%=require('./images/logo.svg')%>" alt="Логотип" class="header__logo">
   </header>
 
 <!-- MAIN OF THE BODY -->
@@ -21,13 +21,15 @@
 <!-- PROFILE -->
 
     <section class="profile">
-      <img src="../images/avatar.jpg" alt="Аватарка" class="profile__avatar">
+      <div class="profile__avatar">
+        <div class="profile__avatar-change"></div>
+      </div>
       <div class="profile__info">
         <h1 class="profile__name">
           Mokwar
         </h1>
         <button type="button" class="profile__edit-button">
-          <img src="../images/Edit_Button.svg" alt="Кнопка - отредактировать имя и описание профиля" class="profile__img-edit-button hover">
+          <img src="<%=require('./images/Edit_Button.svg')%>" alt="Кнопка - отредактировать имя и описание профиля" class="profile__img-edit-button hover">
         </button>
         <p class="profile__description">
           Like to study everytime :D
@@ -65,14 +67,14 @@
           <span class="name-error popup__span"></span>
         </label>
         <label>
-          <input type="text" name="c" id="description" minlength="2" maxlength="200" placeholder="Описание профиля" required class="popup__input popup__input_type_description">
-          <span class="description-error popup__span"></span>
+          <input type="text" name="about" id="about" minlength="2" maxlength="200" placeholder="Описание профиля" required class="popup__input popup__input_type_description">
+          <span class="about-error popup__span"></span>
         </label>
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
     </div>
     <button class="popup__close-button" type="button">
-      <img src="../images/add_button.svg" alt="кнопка закрытия" class="popup__img-close-button hover">
+      <img src="<%=require('./images/add_button.svg')%>" alt="кнопка закрытия" class="popup__img-close-button hover">
     </button>
   </div>
   </div>
@@ -96,7 +98,7 @@
       </form>
     </div>
     <button class="popup__close-button" type="button">
-      <img src="../images/add_button.svg" alt="кнопка закрытия" class="popup__img-close-button hover">
+      <img src="<%=require('./images/add_button.svg')%>" alt="кнопка закрытия" class="popup__img-close-button hover">
     </button>
   </div>
   </div>
@@ -104,22 +106,57 @@
   <div class="popup popup-image">
     <div class="popup-image__container">
       <button class="popup__close-button popup-image__close" type="button">
-        <img src="../images/add_button.svg" alt="кнопка закрытия" class="popup__img-close-button hover">
+        <img src="<%=require('./images/add_button.svg')%>" alt="кнопка закрытия" class="popup__img-close-button hover">
       </button>
-      <img src="../images/add_button.svg" alt="фотография" class="popup-image__photo">
+      <img src="<%=require('./images/add_button.svg')%>" alt="фотография" class="popup-image__photo">
       <p class="popup-image__name"></p>
     </div>
   </div>
+
+  <div class="popup popup-delete">
+    <div class="popup__container">
+    <div class="popup__block">
+      <h2 class="popup__name">
+        Вы уверены?
+      </h2>
+      <form class="popup__form" name="popup" novalidate>
+        <button type="submit" class="popup__save-button">Да</button>
+      </form>
+    </div>
+    <button class="popup__close-button" type="button">
+      <img src="<%=require('./images/add_button.svg')%>" alt="кнопка закрытия" class="popup__img-close-button hover">
+    </button>
+  </div>
+  </div>
   
+  <div class="popup popup-avatar">
+    <div class="popup__container">
+    <div class="popup__block">
+      <h2 class="popup__name">
+        Обновить аватар
+      </h2>
+      <form class="popup__form" name="popup" novalidate>
+        <label>
+          <span class="popup__span"></span>
+          <input type="url" name="description" id="link" placeholder="Ссылка на картинку" required class="popup__input popup__input_type_description">
+          <span class="link-error popup__span"></span>
+        </label>
+        <button type="submit" class="popup__save-button">Сохранить</button>
+      </form>
+    </div>
+    <button class="popup__close-button" type="button">
+      <img src="<%=require('./images/add_button.svg')%>" alt="кнопка закрытия" class="popup__img-close-button hover">
+    </button>
+  </div>
+  </div>
 <!-- TEMPLATES -->
 
 <template id="template_element">
   <div class="element">
     <div class="element__delete hover"></div>
-    <img src="../images/add_button.svg" alt="#" class="element__photo">
-    <h2 class="element__name">
-    </h2>
-    <div class="element__heart hover"></div>
+    <img src="<%=require('./images/add_button.svg')%>" alt="#" class="element__photo">
+    <h2 class="element__name"></h2>
+    <div class="element__heart hover"><p class="element__like-count">0</p></div>
   </div>
 </template>
 
