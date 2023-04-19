@@ -45,45 +45,56 @@ const renderLoading = (is, button) => {
   }
 }
 api.getUserInfo()
-  .then((data) => {
+.then((data) => {
     userInfo.setUserInfo(data)
     avatar.style.backgroundImage = `url(${data.avatar})`
 })
+.catch((err) => {
+  console.log(err);
+})
 
-const renderCard = (item) => {
-  const newCard = new Card(item, config.templateSelector, {
-    handleCardClick(name, src) {
-      popupImg.open(src, name)
-    },
-    handleDeleteClick: (api, id, evt) => {
-      const popupDelete = new PopupWithQ({
-        handleFormSubmit(button) {
-          renderLoading(true, button)
-          api.removeCard(id)
-          renderLoading(false, button)
-          evt.target.closest('.element').remove()
-        }
-      }, '.popup-delete', api, id)
-      popupDelete.setEventListeners()
-      popupDelete.open()
-    },
-  }, api)
-  if (item.owner.name != 'Mokwar') {
-    const card = newCard.generateCard()
-    card.querySelector('.element__delete').remove()
-    newCard.render(elements)
-  }
-  else {
-    newCard.generateCard()
-    newCard.render(elements)
-  }
+const popupDelete = new PopupWithQ({ 
+  handleFormSubmit(id, evt) {
+    api.removeCard(id)
+      .then(() => {
+        evt.target.closest('.element').remove()
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  } 
+}, '.popup-delete')
+popupDelete.setEventListeners()
+
+const renderCard = (item) => { 
+  const newCard = new Card(item, config.templateSelector, { 
+    handleCardClick(name, src) { 
+      popupImg.open(src, name) 
+    }, 
+    handleDeleteClick: (id, evt) => { 
+      popupDelete.open(id, evt) 
+    }, 
+  }, api) 
+  if (item.owner.name != 'Mokwar') { 
+    const card = newCard.generateCard() 
+    card.querySelector('.element__delete').remove() 
+    newCard.render(elements) 
+  } 
+  else { 
+    newCard.generateCard() 
+    newCard.render(elements) 
+  } 
 }
 
 api.getInitialCards()
-  .then(data => {
+.then(data => {
     data.forEach(item => {
       renderCard(item)
     })
+    
+})
+.catch((err) => {
+  console.log(err);
 })
 
 
@@ -115,6 +126,9 @@ const popupPostForm = new PopupWithForm(
         .then((newData) => {
           renderCard(newData)
         })
+        .catch((err) => {
+          console.log(err);
+        })
       renderLoading(false, button)
     }
   },
@@ -134,6 +148,9 @@ const popupAvatarForm = new PopupWithForm(
         .then((data) => {
           avatar.style.backgroundImage = `url(${data.avatar})`
           renderLoading(false, button)
+        })
+        .catch((err) => {
+          console.log(err);
         })
     }
   },

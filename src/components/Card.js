@@ -34,7 +34,7 @@ export default class Card {
             }
         })
         this._delete.addEventListener('click', (evt) => {
-            this._handleDeleteClick(this._api, this._id, evt)
+            this._handleDeleteClick(this._id, evt)
         })
         this._img.addEventListener('click', () => {
             this._handleCardClick(this._nameData, this._imgData)

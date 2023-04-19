@@ -1,18 +1,22 @@
 import Popup from "./Popup.js"
 
 export default class PopupWithQ extends Popup {
-    constructor({handleFormSubmit}, popupSelector, api, id) {
+    constructor({handleFormSubmit}, popupSelector) {
         super(popupSelector)
         this._handleFormSubmit = handleFormSubmit
-        this._button = this._popup.querySelector('.popup__save-button')
     }
     setEventListeners() {
         super.setEventListeners()
-        this._popup.addEventListener('submit', (evt) => {
-            evt.preventDefault()
-            console.log(this._button.textContent)
-            this._handleFormSubmit(this._button)
+        this._popup.addEventListener('submit', (e) => {
+            e.preventDefault()
+            this._handleFormSubmit(this._id, this._evt)
             this.close()
         })
+    }
+    open(id, evt) {
+        super.open()
+        this._id = ''
+        this._id = id
+        this._evt = evt
     }
 }
