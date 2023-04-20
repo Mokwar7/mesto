@@ -19,17 +19,23 @@ export default class Card {
     _seteventListeners() {
         this._heart.addEventListener('click', () => {
             if (this._heart.classList.contains('element__heart_active')) {
-                this._heart.classList.remove('element__heart_active')
                 this._api.removeLike(this._id)
                     .then(data => {
                         this._likes.textContent = data.likes.length
+                        this._heart.classList.remove('element__heart_active')
+                    })
+                    .catch((err) => {
+                        console.log(err);
                     })
             }
             else {
-                this._heart.classList.add('element__heart_active')
                 this._api.addLike(this._id)
                     .then(data => {
                         this._likes.textContent = data.likes.length
+                        this._heart.classList.add('element__heart_active')
+                    })
+                    .catch((err) => {
+                        console.log(err);
                     })
             }
         })
@@ -41,22 +47,26 @@ export default class Card {
         })
     }
 
-    generateCard() {
+    generateCard(ownerID, id) {
         this._card = this._getTemplate();
         this._name = this._card.querySelector('.element__name');
         this._img = this._card.querySelector('.element__photo');
         this._heart = this._card.querySelector('.element__heart');
         this._delete = this._card.querySelector('.element__delete');
+        if (ownerID != id) {
+            this._delete.remove()
+        }
         this._likes = this._card.querySelector('.element__like-count');
+        this._likesCount.forEach(like => {
+            if (like.name == 'Mokwar') {
+                this._heart.classList.add('element__heart_active')
+            }
+        })
         this._likes.textContent = this._likesCount.length;
         this._name.textContent = this._nameData;
         this._img.src = this._imgData;
         this._img.alt = 'Фото ' + this._nameData;
         this._seteventListeners();
         return this._card;
-    }
-
-    render(container) {
-        container.prepend(this._card);
     }
 }

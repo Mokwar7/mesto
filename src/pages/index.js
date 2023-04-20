@@ -6,23 +6,21 @@ import PopupWithForm from '../components/PopupWthForm.js'
 import UserInfo from '../components/UserInfo.js'
 import {config} from '../utils/constants.js';
 import Api from '../components/Api'
-import PopupWithQ from '../components/PopupWithQ'
+import PopupWithConfirmation from '../components/PopupWithConfirmation'
+import Section from '../components/Section'
 
 const profileButton = document.querySelector('.profile__edit-button')
 const addButton = document.querySelector('.profile__add-button')
 const avatarButton = document.querySelector('.profile__avatar')
-const popupProfile = document.querySelector('.popup-profile')
-const formProfile = popupProfile.querySelector('.popup__form')
-const popupPost = document.querySelector('.popup-post')
-const formPost = popupPost.querySelector('.popup__form')
-const popupAvatar = document.querySelector('.popup-avatar')
-const formAvatar = popupAvatar.querySelector('.popup__form')
+const formProfile = document.forms['profile']
+const formPost = document.forms['post']
+const formAvatar = document.forms['avatar']
+let userID = ''
 const formProfileValidation = new FormValidator(config, formProfile)
 const formPostValidation = new FormValidator(config, formPost)
 const formAvatarValidation = new FormValidator(config, formAvatar)
-const userInfo = new UserInfo('.profile__name', '.profile__description')
+const userInfo = new UserInfo('.profile__name', '.profile__description', '.profile__avatar')
 const avatar = document.querySelector('.profile__avatar')
-const elements = document.querySelector('.elements')
 formProfileValidation.enableValidation()
 formPostValidation.enableValidation()
 formAvatarValidation.enableValidation()
@@ -36,28 +34,13 @@ const api = new Api(
     }
   }
 )
-const renderLoading = (is, button) => {
-  if (is) {
-    button.textContent = 'Сохранение...'
-  }
-  else if (!is) {
-    button.textContent = 'Сохранить'
-  }
-}
-api.getUserInfo()
-.then((data) => {
-    userInfo.setUserInfo(data)
-    avatar.style.backgroundImage = `url(${data.avatar})`
-})
-.catch((err) => {
-  console.log(err);
-})
 
-const popupDelete = new PopupWithQ({ 
+const popupDelete = new PopupWithConfirmation({ 
   handleFormSubmit(id, evt) {
     api.removeCard(id)
       .then(() => {
         evt.target.closest('.element').remove()
+        popupDelete.close()
       })
       .catch((err) => {
         console.log(err);
@@ -66,48 +49,54 @@ const popupDelete = new PopupWithQ({
 }, '.popup-delete')
 popupDelete.setEventListeners()
 
-const renderCard = (item) => { 
-  const newCard = new Card(item, config.templateSelector, { 
-    handleCardClick(name, src) { 
-      popupImg.open(src, name) 
-    }, 
-    handleDeleteClick: (id, evt) => { 
-      popupDelete.open(id, evt) 
-    }, 
-  }, api) 
-  if (item.owner.name != 'Mokwar') { 
-    const card = newCard.generateCard() 
-    card.querySelector('.element__delete').remove() 
-    newCard.render(elements) 
-  } 
-  else { 
-    newCard.generateCard() 
-    newCard.render(elements) 
-  } 
-}
+const section = new Section(
+  {
+    renderer: (item) => {
+      const newCard = new Card(item, config.templateSelector, { 
+        handleCardClick(name, src) { 
+          popupImg.open(src, name) 
+        }, 
+        handleDeleteClick: (id, evt) => { 
+          popupDelete.open(id, evt) 
+        }, 
+      }, api)
+      const card = newCard.generateCard(item.owner._id, userID) 
+      section.addItem(card)
+    }
+  },
+  '.elements'
+)
 
-api.getInitialCards()
-.then(data => {
-    data.forEach(item => {
-      renderCard(item)
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([data, cards]) => {
+    userID = data._id
+    userInfo.setUserInfo(data)
+    cards.forEach(item => {
+      section.renderElement(item)
     })
-    
+  })
+  .catch((err) => {
+    console.log(err);
 })
-.catch((err) => {
-  console.log(err);
-})
-
 
 const popupImg = new PopupWithImage('.popup-image')
 popupImg.setEventListeners()
 
 const popupEditForm = new PopupWithForm(
   {
-    handleFormSubmit: (data, button) => {
-      renderLoading(true, button)
+    handleFormSubmit: (data) => {
+      popupEditForm.renderLoading(true)
       api.changeeProfileInfo(data)
-      userInfo.setUserInfo(data)
-      renderLoading(false, button)
+      .then((data) => {
+        popupEditForm.close()
+        userInfo.setUserInfo(data)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupEditForm.renderLoading(false)
+      })
     }
   },
   '.popup-profile'
@@ -115,21 +104,25 @@ const popupEditForm = new PopupWithForm(
 popupEditForm.setEventListeners()
 profileButton.addEventListener('click', () => {
   popupEditForm.open()
-  formProfileValidation.resetButton()
+  popupEditForm.setInputValues(userInfo.getUserInfo())
+  formProfileValidation.disableButton()
 })
 
 const popupPostForm = new PopupWithForm(
   {
-    handleFormSubmit: (data, button) => {
-      renderLoading(true, button)
+    handleFormSubmit: (data) => {
+      popupPostForm.renderLoading(true)
       api.addNewCard(data)
         .then((newData) => {
-          renderCard(newData)
+          section.renderElement(newData)
+          popupPostForm.close()
         })
         .catch((err) => {
           console.log(err);
         })
-      renderLoading(false, button)
+        .finally(() => {
+          popupPostForm.renderLoading(false)
+        })
     }
   },
   '.popup-post'
@@ -137,20 +130,23 @@ const popupPostForm = new PopupWithForm(
 popupPostForm.setEventListeners()
 addButton.addEventListener('click', () => {
   popupPostForm.open()
-  formPostValidation.resetButton()
+  formPostValidation.disableButton()
 })
 
 const popupAvatarForm = new PopupWithForm(
   {
-    handleFormSubmit: (data, button) => {
-      renderLoading(true, button)
+    handleFormSubmit: (data) => {
+      popupAvatarForm.renderLoading(true)
       api.updateAvatar(data.links)
         .then((data) => {
-          avatar.style.backgroundImage = `url(${data.avatar})`
-          renderLoading(false, button)
+          userInfo.setUserInfo(data)
+          popupAvatarForm.close()
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          popupAvatarForm.renderLoading(false)
         })
     }
   },
@@ -159,5 +155,5 @@ const popupAvatarForm = new PopupWithForm(
 popupAvatarForm.setEventListeners()
 avatarButton.addEventListener('click', () => {
   popupAvatarForm.open()
-  formPostValidation.resetButton()
+  formAvatarValidation.disableButton()
 })

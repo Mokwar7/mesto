@@ -11,7 +11,7 @@ export default class Api{
     }
 
     getUserInfo() {
-        return fetch(this._url + 'users/me', {
+        return fetch(`${this._url}users/me`, {
             method: 'GET',
             headers: this._headers
         })
@@ -20,7 +20,7 @@ export default class Api{
     }
 
     getInitialCards() {
-        return fetch(this._url + 'cards', {
+        return fetch(`${this._url}cards`, {
             method: 'GET',
             headers: this._headers
         })
@@ -28,7 +28,7 @@ export default class Api{
     }
 
     changeeProfileInfo(data) {
-        return fetch(this._url + 'users/me', {
+        return fetch(`${this._url}users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
@@ -40,7 +40,7 @@ export default class Api{
     }
 
     addNewCard(data) {
-        return fetch(this._url + 'cards', {
+        return fetch(`${this._url}cards`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({
@@ -52,7 +52,7 @@ export default class Api{
     }
 
     removeCard(id) {
-        return fetch(this._url + 'cards/' + id, {
+        return fetch(`${this._url}cards/${id}`, {
             method: 'DELETE',
             headers: this._headers,
         })
@@ -60,7 +60,7 @@ export default class Api{
     }
 
     addLike(id) {
-        return fetch(`${this._url}/cards/${id}/likes`, {
+        return fetch(`${this._url}cards/${id}/likes`, {
             method: 'PUT',
             headers: this._headers,
         })
@@ -68,7 +68,7 @@ export default class Api{
     }
 
     removeLike(id) {
-        return fetch(`${this._url}/cards/${id}/likes`, {
+        return fetch(`${this._url}cards/${id}/likes`, {
             method: 'DELETE',
             headers: this._headers,
         })
@@ -76,7 +76,7 @@ export default class Api{
     }
 
     updateAvatar(avatar) {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-64/users/me/avatar', {
+        return fetch(`${this._url}users/me/avatar`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
