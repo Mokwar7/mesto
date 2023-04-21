@@ -47,18 +47,18 @@ export default class Card {
         })
     }
 
-    generateCard(ownerID, id) {
+    generateCard(item, id) {
         this._card = this._getTemplate();
         this._name = this._card.querySelector('.element__name');
         this._img = this._card.querySelector('.element__photo');
         this._heart = this._card.querySelector('.element__heart');
         this._delete = this._card.querySelector('.element__delete');
-        if (ownerID != id) {
+        if (item.owner._id != id) {
             this._delete.remove()
         }
         this._likes = this._card.querySelector('.element__like-count');
         this._likesCount.forEach(like => {
-            if (like.name == 'Mokwar') {
+            if (like._id == id) {
                 this._heart.classList.add('element__heart_active')
             }
         })

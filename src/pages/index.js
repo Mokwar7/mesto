@@ -60,7 +60,7 @@ const section = new Section(
           popupDelete.open(id, evt) 
         }, 
       }, api)
-      const card = newCard.generateCard(item.owner._id, userID) 
+      const card = newCard.generateCard(item, userID) 
       section.addItem(card)
     }
   },
@@ -71,9 +71,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([data, cards]) => {
     userID = data._id
     userInfo.setUserInfo(data)
-    cards.forEach(item => {
-      section.renderElement(item)
-    })
+    section.renderElements(cards)
   })
   .catch((err) => {
     console.log(err);
